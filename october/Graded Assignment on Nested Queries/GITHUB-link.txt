@@ -1,1 +1,1 @@
-https://github.com/di1eep/assignments/blob/fd1725feacdcd8aa3e08fe33ca9ebfd4d599787f/october/Graded%20Assignment%20on%20Database%20Schema%20Online%20Retail%20Store/New%20Text%20Document.txt
+https://github.com/di1eep/assignments/tree/78e47a463fa52de4ec1a600790fce56a43740e37/october/Graded%20Assignment%20on%20Nested%20Queries
