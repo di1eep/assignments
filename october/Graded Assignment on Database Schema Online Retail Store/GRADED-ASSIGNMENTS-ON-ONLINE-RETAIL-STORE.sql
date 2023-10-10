@@ -42,7 +42,8 @@ SELECT product_name, price FROM Products;
 SELECT category_id, COUNT(*) AS product_count FROM Products GROUP BY category_id ORDER BY product_count DESC LIMIT 1;
 
 -- Intermediate Queries
--- 5. Find all customers who have not placed any orders.
+/* 5. Find all customers who have not placed any orders. */
+
 SELECT c.customer_id, c.first_name, c.last_name, c.email
 FROM Customers c
 LEFT JOIN Orders o ON c.customer_id = o.customer_id
