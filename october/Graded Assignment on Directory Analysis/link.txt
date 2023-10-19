@@ -1,0 +1,6 @@
+git hub repository-link :        https://github.com/di1eep/assignments.git
+
+
+ and the path   :
+
+october/Graded Assignment on Directory Analysis
