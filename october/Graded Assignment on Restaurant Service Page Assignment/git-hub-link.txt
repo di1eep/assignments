@@ -1,0 +1,6 @@
+assignment link : https://github.com/di1eep/assignments/tree/main/october/Graded%20Assignment%20on%20Restaurant%20Service%20Page%20Assignment
+
+git-hub repository : https://github.com/di1eep/assignments/tree/main/october
+
+path  : october/Graded Assignment on Restaurant Service Page Assignment
+
