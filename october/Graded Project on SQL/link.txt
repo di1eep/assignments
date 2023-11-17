@@ -1,1 +1,6 @@
-https://github.com/di1eep/assignments/tree/main/october/Graded%20Project%20on%20SQL
+ direct link :  https://github.com/di1eep/assignments/tree/main/october/Graded%20Project%20on%20SQL
+
+repository link : https://github.com/di1eep/assignments.git
+
+path link : october/Graded Project on SQL
+

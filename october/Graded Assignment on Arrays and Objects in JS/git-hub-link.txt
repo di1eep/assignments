@@ -1,0 +1,6 @@
+git-hub link : https://github.com/di1eep/assignments/blob/main/october/Graded%20Assignment%20on%20Arrays%20and%20Objects%20in%20JS/git-hub-link.txt
+
+
+repository : https://github.com/di1eep/assignments.git
+
+path : october/Graded Assignment on Arrays and Objects in JS

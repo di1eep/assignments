@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+//   Question 1: Manipulating array using Map and Filter and Reduce
+
+
+    <script>
+
+        
+const customerData = [
+  {
+    customerID: 1,
+    customerName: "Bhupendra Jogi",
+    totalBillingAmount: 2000,
+  },
+  {
+    customerID: 2,
+    customerName: "MC Stan",
+    totalBillingAmount: 250000,
+  },
+  {
+    customerID: 3,
+    customerName: "kachara set",
+    totalBillingAmount: 2000,
+  },
+];
+
+const richCustomers = customerData.filter(
+  (customer) => customer.totalBillingAmount > 3000
+);
+
+richCustomers.map((customer) => {
+  console.log(
+    `${customer.customerName} is a rich guy; he spent ${customer.totalBillingAmount}`
+  );
+});
+
+
+
+
+
+        
+
+    </script>
+</body>
+</html>
