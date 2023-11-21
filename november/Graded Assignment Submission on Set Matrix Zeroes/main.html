@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function setZeroes(matrix) {
+    const rows = matrix.length;
+    const cols = matrix[0].length;
+    
+    // Arrays to track which rows and columns need to be set to zero
+    const zeroRows = new Array(rows).fill(false);
+    const zeroCols = new Array(cols).fill(false);
+
+    // Iterate through the matrix to mark rows and columns with zeros
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            if (matrix[i][j] === 0) {
+                zeroRows[i] = true;
+                zeroCols[j] = true;
+            }
+        }
+    }
+
+    // Set entire rows to zero
+    for (let i = 0; i < rows; i++) {
+        if (zeroRows[i]) {
+            for (let j = 0; j < cols; j++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    // Set entire columns to zero
+    for (let j = 0; j < cols; j++) {
+        if (zeroCols[j]) {
+            for (let i = 0; i < rows; i++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+// Example usage:
+const matrix = [
+    [1, 2, 3],
+    [4, 0, 6],
+    [7, 8, 9]
+];
+
+setZeroes(matrix);
+
+console.log(matrix);
+
+    </script>
+</body>
+</html>
