@@ -11,7 +11,7 @@ def calculate_stock_span(prices):
         j = i - 1
 
         # Backward traversal to find the span
-        while j >= 0 and current_price >= prices[j]:
+        while j >= 0 and current_price >= prices[j]: 
             span += spans[j]
             j -= spans[j]
 

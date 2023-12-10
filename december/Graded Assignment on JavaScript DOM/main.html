@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+         .app {
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+            width: 500px;
+            margin: auto;
+        }
+
+        button {
+            width: 100%;
+            height: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif; /* Added a generic sans-serif font */
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <h2 id="question" class="question"></h2>
+        <form id="quiz-form">
+        </form>
+        <button class="button" id="button">Submit</button>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                "question": "What does HTML stand for?",
+                "choices": [
+                    "Hypertext Markup Language",
+                    "Hypertext Markdown Language",
+                    "Hyperloop Machine Language",
+                    "Helicopters Terminal Motorboats Lamborginis"
+                ],
+                "answer": "Hypertext Markup Language"
+            },
+            {
+                "question": "What does CSS stand for?",
+                "choices": [
+                    "Cascading Style Sheets",
+                    "Cascading Simple Sheets",
+                    "Computer Style Sheets",
+                    "Colorful Style Sheets"
+                ],
+                "answer": "Cascading Style Sheets"
+            },
+            {
+                "question": "What does JS stand for?",
+                "choices": [
+                    "JavaScript",
+                    "JavaSuper",
+                    "JustScript",
+                    "JollySavage"
+                ],
+                "answer": "JavaScript"
+            },
+            {
+                "question": "What does API stand for?",
+                "choices": [
+                    "Application Programming Interface",
+                    "Apple Pie Is...",
+                    "Application Pie Interface",
+                    "Apples Play Idle"
+                ],
+                "answer": "Application Programming Interface"
+            },
+            {
+                "question": "What does JSON stand for?",
+                "choices": [
+                    "JavaScript Object Notation",
+                    "JavaScript On Nap",
+                    "Java Source Open Now",
+                    "Jump Source Object Notation"
+                ],
+                "answer": "JavaScript Object Notation"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+
+        function populateQuestion() {
+            const questionElement = document.getElementById('question');
+            const formElement = document.getElementById('quiz-form');
+            const currentQuestion = quizData[currentQuestionIndex];
+
+            questionElement.textContent = currentQuestion.question;
+
+            formElement.innerHTML = '';
+
+            currentQuestion.choices.forEach((choice, index) => {
+                const inputElement = document.createElement('input');
+                inputElement.type = 'radio';
+                inputElement.id = `answer${index + 1}`;
+                inputElement.name = 'answer';
+                inputElement.value = choice;
+
+                const labelElement = document.createElement('label');
+                labelElement.htmlFor = `answer${index + 1}`;
+                labelElement.textContent = choice;
+
+                formElement.appendChild(inputElement);
+                formElement.appendChild(labelElement);
+                formElement.appendChild(document.createElement('br'));
+            });
+        }
+
+        function showResults() {
+            const appElement = document.querySelector('.app');
+            appElement.innerHTML = '';
+
+            const resultsElement = document.createElement('div');
+            resultsElement.textContent = `You answered ${correctAnswers} / 5 questions correctly`;
+
+            appElement.appendChild(resultsElement);
+        }
+
+        function handleButtonClick() {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+            if (selectedAnswer) {
+                const isCorrect = selectedAnswer.value === quizData[currentQuestionIndex].answer;
+                if (isCorrect) {
+                    correctAnswers++;
+                }
+                console.log(`Question ${currentQuestionIndex + 1}: ${isCorrect ? 'Correct' : 'Wrong'}`);
+
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < quizData.length) {
+                    populateQuestion();
+                } else {
+                    showResults();
+                }
+            } else {
+                alert('Please select an answer.');
+            }
+        }
+
+        // Initial setup
+        populateQuestion();
+        document.getElementById('button').addEventListener('click', handleButtonClick);
+    </script>
+</body>
+</html>
