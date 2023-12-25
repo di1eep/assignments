@@ -1,0 +1,7 @@
+git hub repository : https://github.com/di1eep/assignments.git
+
+
+path : december/Graded Assignment on JavaScript DOM
+
+
+direct link : https://github.com/di1eep/assignments/tree/main/december/Graded%20Assignment%20on%20JavaScript%20DOM
