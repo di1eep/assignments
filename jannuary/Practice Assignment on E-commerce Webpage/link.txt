@@ -1,0 +1,5 @@
+git-hub repository : https://github.com/di1eep/assignments.git
+
+path: jannuary/Practice Assignment on E-commerce Webpage
+
+direct_link: https://github.com/di1eep/assignments/tree/main/jannuary/Practice%20Assignment%20on%20E-commerce%20Webpage
