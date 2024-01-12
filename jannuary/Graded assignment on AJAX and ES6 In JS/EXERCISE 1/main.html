@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .sitdown {
+            color: #3498db;
+        }
+
+        .bar {
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="content">
+        <ul id="restaurantList">
+            <!-- Content will be loaded dynamically using AJAX -->
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "data.xml",
+                dataType: "xml",
+                success: function (xml) {
+                    displayRestaurantData(xml);
+                },
+                error: function () {
+                    alert("Error loading XML file");
+                }
+            });
+        });
+
+        function displayRestaurantData(xml) {
+            var $ul = $("#restaurantList");
+            $(xml).find("restaurant").each(function () {
+                var name = $(this).attr("name");
+                var address = $(this).attr("address");
+                var type = $(this).attr("type");
+
+                var $li = $("<li>").text(name + " - " + address);
+
+                // Change text color based on restaurant type
+                if (type === "sitdown") {
+                    $li.addClass("sitdown");
+                } else if (type === "bar") {
+                    $li.addClass("bar");
+                }
+
+                $ul.append($li);
+            });
+        }
+    </script>
+
+</body>
+</html>

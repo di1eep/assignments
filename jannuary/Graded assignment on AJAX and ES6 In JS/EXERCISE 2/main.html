@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Population Tracker</title>
+
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    #appContainer {
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    input {
+      padding: 8px;
+      margin-bottom: 10px;
+      width: 200px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="appContainer">
+    <h1>Country Population Tracker</h1>
+
+    <label for="countryInput">Enter a country:</label>
+    <input type="text" id="countryInput" placeholder="Country">
+    <button onclick="addCountry()">Add</button>
+
+    <ul id="countryList"></ul>
+  </div>
+
+  <script>
+    function addCountry() {
+      const inputElement = document.getElementById('countryInput');
+      const countryName = inputElement.value.trim();
+
+      // Check if the input is empty
+      if (!countryName) {
+        alert('Please enter a country name.');
+        return;
+      }
+
+      // API endpoint for Restcountries
+      const apiEndpoint = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
+
+      // Fetch data from the API
+      fetch(apiEndpoint)
+        .then(response => response.json())
+        .then(data => {
+          // Check if the API response contains data for the entered country
+          if (data && data.length > 0) {
+            const countryInfo = data[0];
+            const population = countryInfo.population;
+
+            // Add the country and its population to the list
+            const countryList = document.getElementById('countryList');
+            const listItem = document.createElement('li');
+            listItem.textContent = `${countryName}: ${population} population`;
+            countryList.appendChild(listItem);
+
+            // Clear the input field
+            inputElement.value = '';
+          } else {
+            // Display an alert if the country is not recognized
+            alert('Country not found. Please enter a valid country name.');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          alert('An error occurred. Please try again.');
+        });
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
