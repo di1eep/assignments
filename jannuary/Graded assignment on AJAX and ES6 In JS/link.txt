@@ -1,0 +1,5 @@
+direct link : https://github.com/di1eep/assignments/tree/main/jannuary/Graded%20assignment%20on%20AJAX%20and%20ES6%20In%20JS
+
+repository : https://github.com/di1eep/assignments.git
+
+path : jannuary/Graded assignment on AJAX and ES6 In JS
