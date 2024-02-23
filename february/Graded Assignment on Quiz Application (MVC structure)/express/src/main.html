@@ -6,55 +6,55 @@
     <title>Quiz App</title>
     <style>
         body {
-          background-color: #f4f4f9; /* Light grey background for a subtle look */
+          background-color: #f4f4f9;
           font-family: "Poppins", sans-serif;
         }
       
         .app {
-          border: 2px solid #e0e0e0; /* Slight border for definition */
-          border-radius: 10px; /* Rounded corners */
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+          border: 2px solid #e0e0e0;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          height: auto; /* Adjust height automatically */
-          max-width: 500px; /* Max width to maintain form factor */
+          height: auto;
+          max-width: 500px;
           padding: 20px;
-          margin: 40px auto; /* Center the app with more vertical space */
-          background-color: #ffffff; /* White background for the app area */
+          margin: 40px auto;
+          background-color: #ffffff;
         }
       
         button {
-          background-color: #007bff; /* Bootstrap primary blue */
+          background-color: #007bff;
           border: none;
           border-radius: 5px;
           color: white;
           font-weight: bold;
           width: 100%;
-          height: 40px; /* Increased height for better touch target */
-          margin-top: 15px; /* More space above buttons */
-          cursor: pointer; /* Cursor to pointer to indicate clickable */
-          transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+          height: 40px;
+          margin-top: 15px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
         }
       
         button:hover {
-          background-color: #0056b3; /* Darker blue on hover for feedback */
+          background-color: #0056b3;
         }
       
         input[type="text"], input[type="password"] {
-          width: calc(100% - 20px); /* Full width minus padding */
+          width: calc(100% - 20px);
           padding: 10px;
-          margin-top: 10px; /* Space out elements */
-          border: 1px solid #ccc; /* Subtle border */
-          border-radius: 5px; /* Match button border-radius */
-          box-sizing: border-box; /* Include padding and border in element's width */
+          margin-top: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
         }
       
         label {
-          display: block; /* Ensure labels are on their own line */
-          margin-top: 20px; /* Space above labels */
-          color: #333; /* Dark grey for contrast */
+          display: block;
+          margin-top: 20px;
+          color: #333;
         }
       
         #login-section,
@@ -67,7 +67,7 @@
         * {
           margin: 0;
           padding: 0;
-          box-sizing: border-box; /* Ensure padding doesn't affect width */
+          box-sizing: border-box;
         }
       </style>
   </head>
@@ -99,173 +99,4 @@
       <div id="quiz-section" style="display: none">
         <h2 id="question" class="question"></h2>
         <form id="quiz-form"></form>
-        <button class="button" id="quiz-button">Submit</button>
-      </div>
-
-      <div id="result-section" style="display: none">
-        <h2>Quiz Result</h2>
-        <p id="quiz-result"></p>
-      </div>
-    </div>
-
-    <script>
-      const loginSection = document.getElementById("login-section");
-      const quizSection = document.getElementById("quiz-section");
-      const resultSection = document.getElementById("result-section");
-
-      const loginUsernameInput = document.getElementById("login-username");
-      const loginPasswordInput = document.getElementById("login-password");
-      const loginButton = document.getElementById("login-button");
-      const quizButton = document.getElementById("quiz-button");
-
-      const appElement = document.querySelector(".app");
-      const questionElement = document.getElementById("question");
-      const formElement = document.getElementById("quiz-form");
-      const resultElement = document.getElementById("quiz-result");
-
-      let currentQuestionIndex = 0;
-      let correctAnswers = 0;
-      let token = null; // Store the token for authentication
-
-      async function loginUser(username, password) {
-        try {
-          const response = await fetch("http://localhost:3000/login/student", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username,
-              password,
-            }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            token = data.token; // Assume the backend returns a token on successful login
-            loginSection.style.display = "none";
-            quizSection.style.display = "block";
-            fetchQuizQuestion();
-          } else {
-            alert(data.message);
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-
-      async function fetchQuizQuestion() {
-        try {
-          const response = await fetch("http://localhost:3000/quiz/question", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            populateQuestion(data);
-          } else {
-            alert(data.message);
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-
-      async function submitQuizAnswer(optionIndex) {
-        try {
-          const response = await fetch("http://localhost:3000/quiz/submit", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              optionIndex,
-            }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            handleQuizResponse(data);
-          } else {
-            alert(data.message);
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-
-      function populateQuestion(questionData) {
-        questionElement.textContent = questionData.question;
-        formElement.innerHTML = "";
-
-        questionData.options.forEach((choice, index) => {
-          const inputElement = document.createElement("input");
-          inputElement.type = "radio";
-          inputElement.id = `answer${index + 1}`;
-          inputElement.name = "answer";
-          inputElement.value = index;
-
-          const labelElement = document.createElement("label");
-          labelElement.htmlFor = `answer${index + 1}`;
-          labelElement.textContent = choice;
-
-          formElement.appendChild(inputElement);
-          formElement.appendChild(labelElement);
-          formElement.appendChild(document.createElement("br"));
-        });
-      }
-
-      function handleQuizResponse(responseData) {
-        const isCorrect = responseData.result === "Correct";
-        if (isCorrect) {
-          correctAnswers++;
-        }
-
-        console.log(
-          `Question ${currentQuestionIndex + 1}: ${
-            isCorrect ? "Correct" : "Wrong"
-          }`
-        );
-
-        currentQuestionIndex++;
-
-        if (currentQuestionIndex < quizData.length) {
-          fetchQuizQuestion();
-        } else {
-          showResults();
-        }
-      }
-
-      function showResults() {
-        quizSection.style.display = "none";
-        resultSection.style.display = "block";
-        resultElement.textContent = `You answered ${correctAnswers} / ${quizData.length} questions correctly`;
-      }
-
-      // Event listener for the login button
-      loginButton.addEventListener("click", () => {
-        const username = loginUsernameInput.value;
-        const password = loginPasswordInput.value;
-        loginUser(username, password);
-      });
-
-      // Event listener for the quiz submit button
-      quizButton.addEventListener("click", () => {
-        const selectedOption = document.querySelector(
-          'input[name="answer"]:checked'
-        );
-        if (selectedOption) {
-          submitQuizAnswer(parseInt(selectedOption.value, 10));
-        } else {
-          alert("Please select an answer.");
-        }
-      });
-    </script>
-  </body>
-</html>
+        <button class="button"
