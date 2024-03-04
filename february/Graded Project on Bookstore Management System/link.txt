@@ -1,5 +1,5 @@
 github link : https://github.com/di1eep/assignments.git
 
-path : february/Graded Assignment on MVC Architecture
+path : february/Graded Project on Bookstore Management System
 
-direct link: https://github.com/di1eep/assignments/tree/main/february/Graded%20Assignment%20on%20MVC%20Architecture
+direct link: https://github.com/di1eep/assignments/tree/main/february/Graded%20Project%20on%20Bookstore%20Management%20System
